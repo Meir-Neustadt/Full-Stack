@@ -1,0 +1,134 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    background-image: url(pictures/Jlm.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+/* ///////////////////////////////////////////////// */
+header{
+    background: rgb(34,193,195);
+    background: linear-gradient(0deg, rgb(167, 35, 134) 0%, rgb(49, 68, 138) 100%);
+    /* background-position-x: center; */
+    padding: 50px;
+    margin: 0px;
+}
+h1{
+    font-size: 40px;
+    color: rgb(17, 17, 62);
+    text-shadow: 3px 3px 3px blue;
+    text-align: center;
+}
+nav{
+    background-color: rgb(73, 73, 179);
+    padding: 15px;
+}
+nav ul li{
+    background-color:rgb(108, 54, 129);
+    padding: 5px;
+    display: inline;
+    margin-left: 25px;
+    color:rgb(46, 21, 69);
+    font-size: 24px;
+    border: 2px solid blueviolet;
+    border-radius: 6px;
+}
+nav ul li:hover{
+    /* border-bottom: 2px solid rgb(7, 7, 59); */
+    box-shadow: 3px 3px 2px rgb(224, 78, 168);
+    background-color:rgb(165, 114, 185);
+    color:rgb(175, 39, 125);
+    cursor: pointer;
+}
+/* ///////////////////////////////////////////////// */
+main{
+    overflow: auto;
+    width: 95%;
+    margin: 0 auto;
+    padding: 20px;
+}
+section{
+    width: 95%;
+    margin: 0 auto;
+}
+button{
+    background-color:rgb(69, 145, 175);
+    padding: 3px;
+    color:rgb(46, 21, 69);
+    font-size: 18px;
+    border-radius: 4px;   
+}
+button:hover{
+    box-shadow: 3px 3px 2px rgb(224, 78, 168);
+    background-color:rgb(53, 172, 219);
+    color:rgb(73, 23, 119);
+    cursor: pointer;
+}
+/* ///////////////////////////////////////////////// */
+.row::after{
+    display: table;
+    content: "";
+    clear: both;
+}
+.card{
+    width:32%;
+    padding: 15px;
+    float: left;
+    margin: 6px;
+    border-radius: 6px;
+    background-color: skyblue;
+    box-shadow: 3px 3px 3px rgb(199, 159, 159);
+}
+.card img{
+    width: 100%;
+}
+.card2{
+    width:47%;
+    padding: 18px;
+    float: left;
+    margin: 8px;
+    border-radius: 8px;
+    background-color: skyblue;
+    box-shadow: 3px 3px 3px rgb(199, 159, 159);
+}
+.card2 img{
+    width: 100%;
+}
+#Jlm{
+    padding: 10px;
+    background-color: blueviolet;
+}
+#Jlm img{
+    width: 100%;
+    border-radius: 6px;
+}
+#Jlm .row div{
+    padding: 5px;
+    margin: 5px;
+    width: 40%;
+    float: left;
+}
+#Jlm .row article{
+    padding: 5px;
+    margin: 5px;
+    width: 50%;
+    float: left;
+    color: rgb(8, 8, 49);
+}
+#Jlm button{
+    background-color:rgb(226, 86, 179);
+    padding: 3px;
+    color:rgb(39, 8, 69);
+    font-size: 18px;
+    border-radius: 4px;   
+}
+#Jlm button:hover{
+    box-shadow: 3px 3px 2px rgb(224, 78, 168);
+    background-color:rgb(211, 18, 146);
+    color:rgb(73, 23, 119);
+    cursor: pointer;   
+}
+#Empty{
+    height: 60px;
+}
