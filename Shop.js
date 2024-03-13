@@ -2,6 +2,8 @@ const root = document.querySelector('#root')
 const search = document.querySelector('#input')
 const selector = document.querySelector('#selctor')
 const checkbox = document.querySelector('#checkbox')
+
+
 const data = [
     {
         "id": "1",
@@ -61,94 +63,88 @@ const data = [
     }
 ]
 
-let currentData=data
-let requieredSorting='price'
+
+let currentData = data
+let requieredSorting = 'price'
+let searcheInput = ''
 const list = []
 
 
 const render = arr => {
-    sorting(arr,requieredSorting)
-    const cards = arr.map(item =>
-        `<div class="col-4 my-3">
-            <div class="card w-100">
-                <img src="${item.image}" class="card-img-top">
-                <div class="card-body bg-warning-subtle">
-                    <div class="card-title">
-                        <h2>${item.name}</h2>
-                    </div>
-                    <div class="card-text">
-                        <h3>price: <b>${item.price}</b> $</h3>
-                    </div>
-                    <div class="d-flex justify-content-between"> 
-                        <a href="#" class="btn btn-primary">buy now</a>
-                        <div class="text-end">
-                          category: ${item.cat}
+    if(searcheInput.length != 0) arr = filterSearched(arr)
+    if(arr.length > 0){
+        sorting(arr,requieredSorting)
+        const cards = arr.map(item =>
+            `<div class="col-4 my-3">
+                <div class="card w-100">
+                    <img src="${item.image}" class="card-img-top">
+                    <div class="card-body bg-warning-subtle">
+                        <div class="card-title">
+                            <h2>${item.name}</h2>
+                        </div>
+                        <div class="card-text">
+                            <h3>price: <b>${item.price}</b> $</h3>
+                        </div>
+                        <div class="d-flex justify-content-between"> 
+                            <a href="#" class="btn btn-primary">buy now</a>
+                            <div class="text-end">
+                              category: ${item.cat}
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        `)
-    root.innerHTML = cards.join('')
+            </div>`)
+        root.innerHTML = cards.join('')
+    } else root.innerHTML=`<h2>מצטערים, לא נמצאו פריטים התואמים לחיפושך</h2>`
 }
 
-const sorting = (data, key) => {
+const sorting = (arr, key) => {
     switch (key) {
-      case 'price':
-        data.sort((a, b) => a.price - b.price)
-        break
-      case 'price-desc':
-        data.sort((a, b) => b.price - a.price)
-        break
-      case 'name':
-        data.sort((a, b) => a.name.localeCompare(b.name))
+        case 'price':
+            arr.sort((a, b) => a.price - b.price)
+            break
+        case 'price-desc':
+            arr.sort((a, b) => b.price - a.price)
+            break
+        case 'name':
+            arr.sort((a, b) => a.name.localeCompare(b.name))
     }
-  }
+}
 
-const filterForCheck = (data,list)=>{
-  currentData=(data.filter(item => list.includes(item.cat)));
+const filterAsChecked = (arr, list)=>{
+    currentData = (arr.filter(item => list.includes(item.cat)));
+}
+
+const filterSearched = arr => {
+    return currentData.filter(item => item.name.toLowerCase().includes(searcheInput))
 }
 
 
 ////////// Main ///////////
 
+
 render(currentData)
 
-search.addEventListener('input', (e) => {
-    const { value } = e.target
-    let searchedData
-    if (value == '') {
-        render(currentData)
-    } else {
-        searchedData = currentData.filter(item => item.name.toLowerCase().includes(value.toLowerCase()))
-        if(searchedData.length!=0){
-            render(searchedData)
-        }else{
-            root.innerHTML=`<h2>לא נמצאו פריטים התואמים לחיפושך</h2>`
-        }
-    }
+search.addEventListener('input', e => {
+    searcheInput = e.target.value.toLowerCase()
+    render(currentData)
 })
 
-selector.addEventListener('change', (e) => {
+selector.addEventListener('change', e => {
     requieredSorting = e.target.value
     render(currentData)
 })
 
-checkbox.addEventListener('change', (e)=> {
-    const name = e.target.name
-    const check= e.target.checked
-    if(check){
-        list.push(name)
+checkbox.addEventListener('change', e => {
+    const category = e.target.name
+    const checked = e.target.checked
+    if(checked){
+        list.push(category)
     }else{
-        const index = list.indexOf(name)
+        const index = list.indexOf(category)
         list.splice(index, 1)
     }
-    if(list.length == 0){
-        currentData=data
-        render(currentData)
-    }
-    else{
-        filterForCheck(data,list)
-        render(currentData)
-    }
+    if(list.length == 0) currentData = data
+    else filterAsChecked(data,list)
+    render(currentData)
 })
